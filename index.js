@@ -16,11 +16,10 @@ const shoppingListEl = document.getElementById("shopping-list")
 addButtonEl.addEventListener("click", () => submitForm())
 
 function submitForm() {
-    let inputValue = inputFieldEl.value.trim();
-    let sanitizedValue = inputValue.replace(/[^a-z0-9]/gi, '').toLowerCase();
+    let inputValue = inputFieldEl.value;
 
-    if (sanitizedValue !== "") {
-        const itemRef = ref(database, `shoppingList/${sanitizedValue}`);
+    if (inputValue !== "") {
+        const itemRef = ref(database, `shoppingList/${inputValue}`);
         onValue(itemRef, (snapshot) => {
             if (!snapshot.exists()) {
                 set(itemRef, true)
